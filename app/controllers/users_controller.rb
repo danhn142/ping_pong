@@ -4,11 +4,16 @@ class UsersController < ApplicationController
 		if @user.save
 			count = User.all.count
 			@user.update_attribute(:rank, count.to_i)
+			flash[:errors] = ["Success"]
 			redirect_to new_session_path
 		else
 			flash[:errors] = ['Invalid']
 			redirect_to :back
 		end
+	end
+
+	def show
+		
 	end
 
 	private
