@@ -1,0 +1,71 @@
+<div class="container-fluid">
+
+<!-- NAVBAR START -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <div class="navbar-brand">
+          <img alt="Pf Image"/>
+        </div>
+        <ul class="nav navbar-nav">
+          <p class="navbar-text">Hello Mark Otto</p>
+          <p class="navbar-text">stats(rank/win/loss)</p>
+        </ul>
+      </div>
+      <div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Open Challenge</a></li>
+          <li><a href="/">Profile</a></li>
+          <li><a href="/">Log Out</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <!-- NAVBAR end -->
+
+<!-- START MAIN -->
+  <div id="main" class="row">
+    <!-- RANKINGS -->
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Wins</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @players %>
+            <% @players.each do |playa| %>
+            <tr>
+              <td>rank</td>
+              <td>first_name last_name</td>
+              <td>wins_count</td>
+              <td>button</td>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- DISCUSSION -->
+    <div class="col-md-6">
+      <textarea class="form-control" rows="20" style="width:100%" readonly></textarea><br />
+      <div>
+        <form action="" method="post">
+          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+          <textarea class="form-control" rows="3" style="width:100%" placeholder="Post a Comment!"></textarea><br />
+          <div class="text-right">
+            <input class="btn btn-success text-right" type="submit" value="Post Comment" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
