@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-
   root to: 'sessions#new'
+  get 'dashboards/main'
+
   resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
