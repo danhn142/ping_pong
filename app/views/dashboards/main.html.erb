@@ -79,7 +79,7 @@
     <!-- DISCUSSION -->
     <div class="col-md-6">
       <h1 class="text-center">Discussion Board</h1>
-      <div id="discussion" class="form-control" style="width:100%; height:450px; overflow:auto;">
+      <div id="discussion_box" class="form-control" style="width:100%; height:450px; overflow:auto;">
         <% if @comments %>
           <% @comments.each do |comment| %>
             <% if comment.user == current_user %>
@@ -95,6 +95,7 @@
             <% end %>
           <% end %>
         <% end %>
+        <span id='bottom'></span>
       </div><br />
       <div>
         <form action="/comments/create" method="post">
