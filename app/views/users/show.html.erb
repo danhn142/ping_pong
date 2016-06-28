@@ -9,11 +9,11 @@
 	  </div>
 	  
 	  <div class="col-md-4">
-	  	<h3>Name</h3>
+	  	<h3><%= @user.first_name %> <%= @user.last_name %></h3>
 	  	<div>
 	  		<img src="" alt= "Profile Picture">
 	  	</div>
-	  	<p><a href="">Edit Profile</a></p>
+	  	<p><a href="/">Edit Profile</a></p>
 	  </div>
 
 	</div>
@@ -28,10 +28,19 @@
 
 		<ul class="list-group">
 		  <li class="list-group-item">
-		    <span class="badge">14</span>
-		    Cras justo odio
+		    <span class="badge"><%= @user.rank %></span>
+		    Ranking Status: 
+		  </li>
+		  <li class="list-group-item">
+		    <span class="badge"><%= @user.win %></span>
+		    How many times you have won: 
+		  </li>
+		  <li class="list-group-item">
+		    <span class="badge"><%= @user.loss %></span>
+		    How many times you have loss: 
 		  </li>
 		</ul>
+
 	  </div>	
 	</div>
 	<!-- End of the Status of your Profile -->
