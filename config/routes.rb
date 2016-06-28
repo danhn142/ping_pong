@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
+
+  post 'comments/create'
+
   root to: 'sessions#new'
   get 'dashboards/main'
 
   resources :users
   resources :sessions
+  resources :matches
 
-  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

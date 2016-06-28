@@ -6,17 +6,25 @@
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <div class="navbar-brand">
-          <img alt="Pf Image"/>
+          <img alt="Avatar"/>
         </div>
-        <ul class="nav navbar-nav">
-          <p class="navbar-text">Hello Mark Otto</p>
-          <p class="navbar-text">stats(rank/win/loss)</p>
+        <ul class="nav navbar-nav list-inline">
+          <li>
+            <h4 class="navbar-text">Hello <%=current_user.first_name%></h4>
+          </li>
+          <li>
+            <ul class="navbar-text list-inline">
+              <li>rank: <%= current_user.rank %></li>
+              <li>win: <%= current_user.win %></li>
+              <li>loss: <%= current_user.loss %></li>
+            </ul>
+          </li>
         </ul>
       </div>
       <div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Open Challenge</a></li>
-          <li><a href="/">Profile</a></li>
+          <li><a href="/">Open Challenge</a></li>
+          <li><a href="/users/<%=current_user.id%>">Profile</a></li>
           <li><a href="/">Log Out</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -28,6 +36,7 @@
   <div id="main" class="row">
     <!-- RANKINGS -->
     <div class="col-md-6">
+      <h1 class="text-center">Player Rankings</h1>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -41,10 +50,26 @@
           <% if @players %>
             <% @players.each do |playa| %>
             <tr>
-              <td>rank</td>
-              <td>first_name last_name</td>
-              <td>wins_count</td>
-              <td>button</td>
+              <td><%=playa.rank%></td>
+              <td><a href="/users/<%=playa.id%>"><u><%=playa.first_name%> <%=playa.last_name%></u></a></td>
+              <td><%=playa.win%></td>
+              <td>
+                <ul class="list-inline">
+                  <% if playa.rank == 1 %>
+                  <li>
+                    <p>Current Champion!</p>
+                  </li>
+                  <% end %>
+                  <% if playa.rank == current_user.rank-1 %>
+                  <li>
+                    <form action="" method="post">
+                      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                      <input type="submit" value="Challenge!" />
+                    </form>
+                  </li>
+                  <% end %>
+                </ul>
+              </td>
             </tr>
             <% end %>
           <% end %>
@@ -53,11 +78,28 @@
     </div>
     <!-- DISCUSSION -->
     <div class="col-md-6">
-      <textarea class="form-control" rows="20" style="width:100%" readonly></textarea><br />
+      <h1 class="text-center">Discussion Board</h1>
+      <div id="discussion" class="form-control" style="width:100%; height:450px; overflow:auto;">
+        <% if @comments %>
+          <% @comments.each do |comment| %>
+            <% if comment.user == current_user %>
+              <div class="list-group text-right">
+                <h4><%=comment.user.first_name%><br /><small> sent at <%= comment.created_at.strftime("%a %b %e %I:%M%p") %></small></h4>
+                <p><%=comment.comment%></p>
+              </div>
+            <% else %>
+              <div class="list-group">
+                <h4><%=comment.user.first_name%><br /><small> sent at <%= comment.created_at.strftime("%a %b %e %I:%M%p") %></small></h4>
+                <p><%=comment.comment%></p>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div><br />
       <div>
-        <form action="" method="post">
+        <form action="/comments/create" method="post">
           <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
-          <textarea class="form-control" rows="3" style="width:100%" placeholder="Post a Comment!"></textarea><br />
+          <textarea class="form-control" rows="3" style="width:100%" name="comment[comment]" placeholder="Post a Comment!"></textarea><br />
           <div class="text-right">
             <input class="btn btn-success text-right" type="submit" value="Post Comment" />
           </div>
