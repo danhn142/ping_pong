@@ -62,10 +62,23 @@
                   <% end %>
                   <% if playa.rank == current_user.rank-1 %>
                   <li>
-                    <form action="" method="post">
-                      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-                      <input type="submit" value="Challenge!" />
-                    </form>
+                    <% if playa.matches %>
+                      <% if playa.matches.first.status == "nil" %>
+                        <form action="/matches" method="post">
+                          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                          <input type="hidden" name="match[opponent_id]" value="<%=playa.id%>">
+                          <input type="hidden" name="match[status]" value="pending">
+                          <input type="hidden" name="match[match_type]" value="private">
+                          <input type="submit" value="Challenge!" />
+                        </form>
+                      <% elsif playa.matches.first.status == "pending" %>
+                        <form action="/matches/<%=playa.matches.where(status:'pending').first.id%>" method="post">
+                          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                          <input type="hidden" name="_method" value="delete" />
+                          <input type="submit" value="Cancel" />
+                        </form>
+                      <% end %>
+                    <% end %>
                   </li>
                   <% end %>
                 </ul>
