@@ -11,8 +11,9 @@
 	  <div class="col-md-4">
 	  	<h3><%= @user.first_name %> <%= @user.last_name %></h3>
 	  	<div>
-	  		<img src="" alt= "Profile Picture">
+	  		<%= image_tag @user.avatar.url(:thumb) %>
 	  	</div>
+	  	<br>
 	  	<p><a href="/users/<%= @user.id %>/edit">Edit Profile</a></p>
 	  </div>
 

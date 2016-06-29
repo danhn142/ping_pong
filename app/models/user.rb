@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
-  has_attached_file :avatar
+  has_attached_file :avatar, :styles => {:thumb => "100x100>"} 
   has_many :comments
   has_many :matches, :foreign_key => 'user_id', :class_name => "Match"
   has_many :opponents, through: :matches

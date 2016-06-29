@@ -5,7 +5,7 @@
 	<div class="row">
 
 	  <!-- Beginning of Edit profile -->
-	  <div class="col-md-8">
+	  <!-- <div class="col-md-8">
 	  	<form action = "/users/<%= @user.id %>" method = "post">
 	  		<input type = "hidden" name = "authenticity_token" value = "<%= form_authenticity_token %>">
 	  		<input type = 'hidden' name = "_method" value = "patch">
@@ -42,7 +42,7 @@
 	        <div class = "form-group">
 	        	<label for="bio" class= "col-sm-2 control-label">About Me:</label>
 	        	<div class = "col-sm-offset-2 col-sm-10">
-	        		<textarea class="form-control" name= "user[bio]" rows="4" cols="82" id ="bio"></textarea>
+	        		<textarea class="form-control" name= "user[bio]" rows="4" cols="82" id ="bio"><%= @user.bio %></textarea>
 	        	</div>
 	        </div>
 
@@ -52,8 +52,27 @@
 	          </div>
 	        </div>
         </form>
-	  </div>
+	  </div> -->
 	  <!-- End of Edit profile -->
+
+	  <!-- Beginning of Helper form  -->
+	  <div class = "col-md-8">
+	  	<%= form_for @user, :html => {:multipart => true} do |f| %>
+		  <%= f.label :first_name %>
+		  <%= f.text_field :first_name %>
+		  <br>
+		  <%= f.label :last_name %>
+		  <%= f.text_field :last_name %>
+		  <br>
+		  <%= f.label :email %>
+		  <%= f.text_field :email %>
+		  <br>
+		  <%= f.label :avatar %>
+		  <%= f.file_field :avatar %>
+		  <br>
+		  <%= f.submit :submit %>
+		<% end %>
+	  <!-- End of Helper Form -->
 
 	</div>  
 
