@@ -29,13 +29,16 @@ class MatchesController < ApplicationController
       redirect_to '/dashboards/main#bottom'
     elsif params[:click] == "Challenger Wins"
       @accept.update_attribute(:in_session, @accept.user)
-      @accept.user.rank.increment
-      @accept.user.win.increment
-      redirect_to 'dashboards/main#bottom'
+      @accept.user.increment!(:win)
+      @accept.opponent.increment!(:loss)
+      @accept.user.decrement!(:rank)
+      @accept.opponent.increment!(:rank)
+      redirect_to '/dashboards/main#bottom'
     else
       @accept.update_attribute(:in_session, @accept.opponent)
-      @accept.opponent.rank
-      redirect_to 'dashboards/main#bottom'
+      @accept.opponent.increment!(:win)
+      @accept.user.increment!(:loss)
+      redirect_to '/dashboards/main#bottom'
     end
   end
 
