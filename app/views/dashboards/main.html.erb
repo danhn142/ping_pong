@@ -60,27 +60,42 @@
                     <p>Current Champion!</p>
                   </li>
                   <% end %>
+                  <!-- FORM FOR CREATE/DESTROY -->
                   <% if playa.rank == current_user.rank-1 %>
                   <li>
-                    <% if playa.matches %>
-                      <% if playa.matches.first.status == "nil" %>
-                        <form action="/matches" method="post">
-                          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-                          <input type="hidden" name="match[opponent_id]" value="<%=playa.id%>">
-                          <input type="hidden" name="match[status]" value="pending">
-                          <input type="hidden" name="match[match_type]" value="private">
-                          <input type="submit" value="Challenge!" />
-                        </form>
-                      <% elsif playa.matches.first.status == "pending" %>
-                        <form action="/matches/<%=playa.matches.where(status:'pending').first.id%>" method="post">
-                          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
-                          <input type="hidden" name="_method" value="delete" />
-                          <input type="submit" value="Cancel" />
-                        </form>
-                      <% end %>
+                    <% if @challenge.present? %>
+                      <form action="/matches/<%= @challenge.last.id%>" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                        <input type="hidden" name="_method" value="delete" />
+                        <input type="submit" value="Cancel" />
+                      </form>
+                    <% else %>
+                      <form action="/matches" method="post">
+                        <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                        <input type="hidden" name="match[opponent_id]" value="<%=playa.id%>">
+                        <input type="hidden" name="match[status]" value="pending">
+                        <input type="hidden" name="match[match_type]" value="private">
+                        <input type="submit" value="Challenge!" />
+                      </form>
                     <% end %>
-                  </li>
                   <% end %>
+                  </li>
+                  <!-- END CREATE/DESTROY -->
+                  <!-- ACCEPT/DENY -->
+                  <% if playa.rank == current_user.rank %>
+                    <% if @pending %>
+                      <li>
+                        <p><%=@challenger.first_name%> challenged you!</p>
+                        <form action="/matches/<%= @pending.id%>" method="post">
+                          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+                          <input type="hidden" name="_method" value="patch" />
+                          <input type="submit" value="Accept" />
+                          <input type="submit" value="Deny" />
+                        </form>
+                      </li>
+                    <% end %>
+                  <% end %>
+                  <!-- END ACCEPT/DENY -->
                 </ul>
               </td>
             </tr>
