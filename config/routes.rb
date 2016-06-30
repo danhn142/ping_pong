@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'game/show'
+
   post 'comments/create'
 
   root to: 'sessions#new'

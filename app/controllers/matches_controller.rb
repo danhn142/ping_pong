@@ -15,13 +15,28 @@ class MatchesController < ApplicationController
         redirect_to :back
       end
     end
+  end
 
-    def destroy
-      @match = current_user.matches.where(status:"pending").first.id
-      @match.destroy
-      redirect_to 'dashboards/main#bottom'
+  def update
+    @match = Match.find(params[:id])
+    if value = "Accept"
+      # where(user: User.where(rank: current_user.rank+1), opponent: current_user, status: "pending").first
+      @match.update_attribute(:status, "Accept")
+      redirect_to '/game/show'
+    else
+      @match.update_attribute(:status, "Deny")
+      redirect_to '/dashboards/main#bottom'
     end
   end
+
+  def destroy
+    @rank_up
+    @match = Match.find(params[:id])
+    # where(user: current_user, opponent: User.where(rank: current_user.rank-1)).last
+    @match.destroy
+    redirect_to '/dashboards/main#bottom'
+  end
+
 
 
 end
