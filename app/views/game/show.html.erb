@@ -1,3 +1,10 @@
 <div class="container-fluid text-center">
   <h1>GAME IN SESSION!</h1>
+    <h3><%=@accept.user.first_name%> vs. <%=@accept.opponent.first_name%></h3>
+    <form action="/matches/<%=@accept.id%>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>" />
+      <input type="hidden" name="_method" value="patch" />
+      <input type="submit" value="Challenger Wins">
+      <input type="submit" value="Defender Wins">
+    </form>
 </div>

@@ -19,13 +19,22 @@ class MatchesController < ApplicationController
 
   def update
     @match = Match.find(params[:id])
+    @accept = Match.where(user: User.where(rank: current_user.rank+1), opponent: current_user, status: "Accept").last
     if value = "Accept"
       # where(user: User.where(rank: current_user.rank+1), opponent: current_user, status: "pending").first
       @match.update_attribute(:status, "Accept")
       redirect_to '/game/show'
-    else
+    end
+    if value = "Deny"
       @match.update_attribute(:status, "Deny")
       redirect_to '/dashboards/main#bottom'
+    end
+    if value = "Challenger Wins"
+      @match.update_attribute(:in_session, @accept.user.id)
+      redirect_to :back
+    else
+      @match.update_attribute(:in_session, @accept.opponent.id)
+      redirect_to :back
     end
   end
 
