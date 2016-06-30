@@ -4,7 +4,7 @@
     <form action="/matches/<%=@accept.id%>" method="post">
       <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>" />
       <input type="hidden" name="_method" value="patch" />
-      <input type="submit" value="Challenger Wins">
-      <input type="submit" value="Defender Wins">
+      <input type="submit" name="click" value="Challenger Wins">
+      <input type="submit" name="click" value="Defender Wins">
     </form>
 </div>

@@ -89,8 +89,8 @@
                         <form action="/matches/<%= @pending.id%>" method="post">
                           <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
                           <input type="hidden" name="_method" value="patch" />
-                          <input type="submit" value="Accept" />
-                          <input type="submit" value="Deny" />
+                          <input type="submit" name="click" value="Accept" />
+                          <input type="submit" name="click" value="Deny" />
                         </form>
                       </li>
                     <% end %>
