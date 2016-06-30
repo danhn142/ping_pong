@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160630044619) do
     t.string   "password_digest"
     t.integer  "win",                 default: 0, null: false
     t.integer  "loss",                default: 0, null: false
-    t.integer  "rank",                default: 0, null: false
+    t.integer  "rank",                default: 0
     t.text     "bio"
     t.datetime "created_at"
     t.datetime "updated_at"
