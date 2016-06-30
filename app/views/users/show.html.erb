@@ -43,7 +43,7 @@
 	  	
 	  	<h3><%= @user.first_name %> <%= @user.last_name %></h3>
 	  	<div>
-	  		<%= image_tag @user.avatar.url() %>
+	  		<%= image_tag @user.avatar.url(:medium) %>
 	  	</div>
 	  	<br>
 	  	<p><a href="/users/<%= @user.id %>/edit">Edit Profile</a></p>
