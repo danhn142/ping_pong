@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-
+  
   get 'game/show'
 
   post 'comments/create'
 
   root to: 'sessions#new'
   get 'dashboards/main'
+
+  
 
   resources :users
   resources :sessions
