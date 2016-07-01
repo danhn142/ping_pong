@@ -1,5 +1,10 @@
 <div class = "container">
 	<!-- NAVBAR START -->
+  <% unless @user.confirmed %>
+  <p>
+    <%= link_to "Verify your account now.", verify_path %>
+  </p>
+  <% else -%>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,17 +35,17 @@
     </div><!-- /.container-fluid -->
   </nav>
   <!-- NAVBAR end -->
-	
+
 	<!-- Beginning of your About Me of Profile -->
-	<div class="row"> 
-	  
-	  <div class="col-md-8">	
+	<div class="row">
+
+	  <div class="col-md-8">
 	  	<h3>About Me:</h3>
-	  	<p><%= @user.bio %></p>	  	
+	  	<p><%= @user.bio %></p>
 	  </div>
-	  
+
 	  <div class="col-md-4">
-	  	
+
 	  	<h3><%= @user.first_name %> <%= @user.last_name %></h3>
 	  	<div>
 	  		<%= image_tag @user.avatar.url(:medium) %>
@@ -62,21 +67,21 @@
 		<ul class="list-group">
 		  <li class="list-group-item">
 		    <span class="badge"><%= @user.rank %></span>
-		    Ranking Status: 
+		    Ranking Status:
 		  </li>
 		  <li class="list-group-item">
 		    <span class="badge"><%= @user.win %></span>
-		    How many times you have won: 
+		    How many times you have won:
 		  </li>
 		  <li class="list-group-item">
 		    <span class="badge"><%= @user.loss %></span>
-		    How many times you have loss: 
+		    How many times you have loss:
 		  </li>
 		</ul>
 
-	  </div>	
+	  </div>
 	</div>
 	<!-- End of the Status of your Profile -->
 
-
+  <% end %>
 </div>

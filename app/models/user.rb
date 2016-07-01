@@ -11,9 +11,18 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :email, presence:true, length: { in: 2..20 }
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: EMAIL_REGEX }
 
-before_save :default_values
-  def default_values
-    self.bio ||= 'Tell us about yourself.'
+  def confirm!
+    self.confirmed = true
+    save!
   end
+
+  # def pretty_phone_number
+  #   phone.phone_formatted(format: :international, spaces: ' ')
+  # end
+
+  before_save :default_values
+    def default_values
+      self.bio ||= 'Tell us about yourself.'
+    end
 
 end

@@ -10,6 +10,7 @@ class MatchesController < ApplicationController
       @match.status = params[:match][:status]
       @match.match_type = params[:match][:match_type]
       if @match.save
+        ConfirmationSender.send_message_to(@match.opponent)
         redirect_to :back
       else
         redirect_to :back

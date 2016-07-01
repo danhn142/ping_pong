@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
     user = User.find(params[:id])
     redirect_to "/users/#{current_user.id}" if current_user != user
   end
+  def authenticated?
+    session[:user_id] && session[:authenticated]
+  end
+  def authenticate!
+    redirect_to '/sessions/new' unless authenticated?
+  end
 end

@@ -1,0 +1,14 @@
+<div class="container">
+  <h1> <%=@user.first_name%> </h1>
+  <p>We have sent you a SMS with a code to the number above.</p>
+  <p>To complete your phone number verification, please enter the 6-digits activation code.</p>
+
+  <form action="/confirmations" method="post">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    <input type="hidden" name="user_id" value="<%=@user.id%>" />
+    <label for="verification_code" class="col-sm-3 control-label">Enter verification code:</label>
+    <input type="text" name="verification_code" id="verification_code" class="form-control col-sm-5"/>
+    <input type="submit" value="Confirm" class="btn btn-success" />
+  </form>
+
+</div>

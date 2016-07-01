@@ -40,6 +40,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'hirb'
 gem "paperclip", "~> 4.2"
+gem 'authy'
+gem 'twilio-ruby'
+gem 'figaro'
 
 source 'https://rubygems.org'
 gem 'rails', '4.1.8'
