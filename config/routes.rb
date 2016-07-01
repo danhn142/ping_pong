@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   root to: 'sessions#new'
   get 'dashboards/main'
 
-  get 'users/verify_now', to: 'users#show_verify'
-  post 'users/verify'
-  post 'users/resend'
   resources :users
   resources :sessions
   resources :matches

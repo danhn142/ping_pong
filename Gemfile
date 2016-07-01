@@ -38,6 +38,10 @@ gem 'bcrypt', '~> 3.1.7'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+
+gem 'koala', '1.10.0'
+
 gem 'hirb'
 gem "paperclip", "~> 4.2"
 gem 'authy'
